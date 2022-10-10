@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>More Fundamentals of HTML</h1>
+    <h3>Tables</h3>
+    <p>Tables should only be used for tabulated data and not for page layout. As with all other HTML elements tables
+        should be styled with CSS but we will bend the rule slightly and use the border attributes for this exercise</p>
+
+    <table style="border: 1px solid;">
+        <caption>
+            The caption helps screen reader uses to understand the table
+        </caption>
+
+        <tr>
+            <th>One</th>
+            <th>Two</th>
+            <th>Three</th>
+        </tr>
+        <tr>
+            <td>This</td>
+            <td>That</td>
+            <td>Other</td>
+        </tr>
+        <tr>
+            <td>Which</td>
+            <td>What</td>
+            <td>When</td>
+        </tr>
+
+
+    </table>
+
+    <h1>Lists</h1>
+    <p>Lists are very important in web page design, theya re for example the basis of page navigation</p>
+    <h3>Unordered Lists</h3>
+    <ul>
+        <li>blue</li>
+        <li>red</li>
+        <li>green</li>
+    </ul>
+    <h3>Ordered Lists</h3>
+    <ol>
+        <li>blue</li>
+        <li>red</li>
+        <li>green</li>
+    </ol>
+    <h3>Nested Lists</h3>
+    <ol>
+        <li>one</li>
+        <li>two
+            <ol>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </li>
+        <li>three</li>
+    </ol>
+    <h1>Forms</h1>
+    <h3>A simple login form</h3>
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button>Submit</button>
+    </form>
+
+    <h3>Other common form elements and group by fieldset</h3>
+    <fieldset>
+        <legend>Enter your login details</legend>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </form>
+    </fieldset>
+
+    <fieldset>
+        <legend>Pizza Selection</legend>
+        <form>
+            <p>Size:
+                <input type="radio" id="size_small" name="size" value="small">
+                <label for="size_small">Small </label>
+                <input type="radio" id="size_medium" name="size" value="medium">
+                <label for="size_medium">Medium </label>
+                <input type="radio" id="size_large" name="size" value="large">
+                <label for="size_large">Large </label>
+            </p>
+
+            <label for="toppings">Toppings:</label>
+            <select name="toppings" id="toppings">
+                <option value="none" selected disabled hidden>Please select</option>
+                <option value="toppings_pepperoni">Pepperoni</option>
+                <option value="toppings_mushroom">Mushroom</option>
+                <option value="toppings_onions">Onions</option>
+            </select>
+
+            <p>Extras:
+                <input type="checkbox" id="extra_parmesan" name="extra" value="parmesan">
+                <label for="size_small">Small </label>
+                <input type="checkbox" id="extra_olives" name="extra" value="olives">
+                <label for="size_medium">Medium </label>
+                <input type="checkbox" id="extra_crapers" name="extra" value="capers">
+                <label for="size_large">Large </label>
+            </p>
+
+        </form>
+    </fieldset>
+    <button>Submit</button>
+    <button>Clear</button>
+    <p>Return to the <a href="first.html">first page.</a></p>
+
+</body>
+
+</html>
