@@ -29,9 +29,9 @@
             <input type="submit" value="Submit" name="btnSubmit">
             <input type="reset" value="Clear" name="btnClear">
         </fieldset>
-
-        <a href=""></a>
     </form>
+
+    <a href="displayProducts.php">Display Products</a>
 
 </body>
 </html>

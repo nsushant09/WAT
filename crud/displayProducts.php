@@ -22,8 +22,8 @@
         echo("<td>" .$row['ProductName'] ."</td>");
         echo("<td>" .$row['ProductPrice'] ."</td>");
         echo("<td>" .$imageDisplayString ."</td>");
-        echo("<td><a href=\"amendProduct.php?id=" .$id ."&action=edit\">Amend</a></td>");
-        echo("<td><a href=\"deleteProduct.php?id=" .$id ."&action=delete\">Delete</a></td>");
+        echo("<td><a href=\"amendProduct.php?id=" .$row['ProductID'] ."&action=edit\">Amend</a></td>");
+        echo("<td><a href=\"deleteProduct.php?id=" .$row['ProductID'] ."&action=delete\">Delete</a></td>");
         echo("</tr>");
     }
 

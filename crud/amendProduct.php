@@ -7,40 +7,30 @@
     <title>Amend</title>
 </head>
 <body>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="updateProduct.php" method="POST" enctype="multipart/form-data">
         <fieldset>
             <legend>Enter Product Details</legend>
+            <input type="hidden" name="productID" value="<?php
+                echo($_GET['id']);
+            ?>">
             <label for="productName">Product Name:</label>
-            <input type="text" name="productName">
+            <input type="text" name="productName" value="<?php
+
+            ?>">
             <br>
             <br>
             <label for="productPrice">Product Price:</label>
-            <input type="text" name="productPrice">
+            <input type="text" name="productPrice" value="<?php
+
+            ?>">
             <br>
             <br>
             <label for="productImage">Image Filename:</label>
-            <input type="text" name="productImage">
+            <input type="text" name="productImage" value="<?php
+            ?>">
         </fieldset>
         <input type="submit" value="Submit" name="btnSubmit">
         <input type="reset" value="Clear" name="btnClear">
     </form>
 </body>
 </html>
-
-<?php
-
-    include("connection.php");
-    $updateId = $_GET['id'];
-    $productName = $_GET['productName'];
-    $productPrice = $_GET['productPrice'];
-    $productImage = $_GET['productImage'];
-
-    if(isset($_GET['id']) && isset($_GET['action'])){
-        $query = "UPDATE Product SET ProductName = '$productName', ProductPrice = '$productPrice' , ProductImageName = '$productImage'";
-        if(mysqli_query($connection, $query)){
-            header("location:crud.php");
-        }else{
-            echo("</br>Could not update data");
-        }
-    }
-?>

@@ -5,15 +5,15 @@
 
         $productName = trim($_POST['productName']);
         $productPrice = number_format($_POST['productPrice'], 2);
-        $productImage = trim($_POST['productImage'])
+        $productImage = trim($_POST['productImage']);
         $location = "uploads/" .$productImage;
 
 
         if(
             !empty($productName) and
-            !empty($productPrice) and
+            !empty($productPrice)
         ){
-            $query = "INSERT INTO Product (ProductName, ProductPrice, ProductImageName) VALUES ('$productName','$productPrice','$productImage')";
+            $query = "INSERT INTO Product(ProductName, ProductPrice, ProductImageName) VALUES ('$productName','$productPrice','$productImage')";
 
             if(mysqli_query($connection, $query)){
                 echo("<br>Inserted data successfully ");
@@ -22,6 +22,7 @@
             }
         }else{
             echo("Invalid Inputs");
+            echo("<a href=\"crud.php\">Go to CRUD Page</a>");
         }
 
         header("Location: {$_SERVER['HTTP_REFERER']}");
