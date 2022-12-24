@@ -16,8 +16,5 @@
         }else{
             echo "ERROR: Could not able to execute " .$insertQuery .mysqli_error($connection);
         }
-        
-
-
     }
 ?>
