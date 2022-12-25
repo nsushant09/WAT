@@ -11,22 +11,20 @@
         <fieldset>
             <legend>Enter Product Details</legend>
             <input type="hidden" name="productID" value="<?php
-                echo($_GET['id']);
             ?>">
             <label for="productName">Product Name:</label>
             <input type="text" name="productName" value="<?php
-
             ?>">
             <br>
             <br>
             <label for="productPrice">Product Price:</label>
             <input type="text" name="productPrice" value="<?php
-
             ?>">
             <br>
             <br>
             <label for="productImage">Image Filename:</label>
             <input type="text" name="productImage" value="<?php
+            
             ?>">
         </fieldset>
         <input type="submit" value="Submit" name="btnSubmit">
