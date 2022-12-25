@@ -1,0 +1,60 @@
+body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.container{
+    background-color: whitesmoke;
+    margin:auto;
+    border:1px solid black;
+    width:fit-content;
+    min-width: 525px;
+    position:absolute;
+    border-radius:32px;
+    padding: 32px;
+    top: 50%;
+    transform:translateY(-50%);
+}
+
+#submitButtonID{
+    background-color: #061c34;
+    border-color: #061c34;
+}
+
+#submitButtonID:hover{
+    background-color: #061c34e0;
+    border-color: #061c34e0;
+}
+
+#cancelButtonID{
+    border-color: #061c34;
+    color: #061c34;
+}
+
+#cancelButtonID:hover{
+    background-color: white;
+}
+
+
+.title{
+    font-size: xx-large;
+}
+
+#extrasNoteID{
+    margin-top: 8px;
+}
+
+#usernameError, #passwordError, #emailError, #ageRangeError, #chkTandCError{
+    color: rgba(229, 58, 58, 0.885);
+} 
+
+a{
+    text-decoration: none;
+    color: #061c34;
+    font-weight: bold;
+}
