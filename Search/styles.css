@@ -2,23 +2,16 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    background-image: url(background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
+    background-color: whitesmoke;
 }
 
 .container{
-    background-color: whitesmoke;
-    margin:auto;
-    border:1px solid black;
-    width:fit-content;
-    min-width: 525px;
-    position:absolute;
-    border-radius:32px;
+    background-color: white;
+    border-radius: 32px;
     padding: 32px;
-    top: 50%;
-    transform:translateY(-50%);
+    box-shadow: #061c34;
 }
 
 #submitButtonID{
@@ -56,6 +49,10 @@ body{
 
 a{
     text-decoration: none;
-    color: #061c34;
     font-weight: bold;
+}
+
+#btnFilter{
+    background: #061c34;
+    margin: 16px;
 }

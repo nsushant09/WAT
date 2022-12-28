@@ -20,18 +20,20 @@
                     }else{
                         setcookie("LOGGED_IN_USER", $row['userName'], time() + 600, "/");
                     }
+                    setcookie("LOGGED_IN_ADMIN", "", time() - 3600 , "/");
                 }else{
                     if($chkRemember == 'on'){
                         setcookie("LOGGED_IN_ADMIN",$row['userName'], time() + (86400 * 7),"/");
                     }else{
                         setcookie("LOGGED_IN_ADMIN", $row['userName'], time() + 600, "/");
                     }
+                    setcookie("LOGGED_IN_USER", "", time() - 3600 , "/");
                 }
             }
             header('location:main.php');
         }else{
             $_SESSION['loginError'] = "<br>Invalid Username or Password";
-            header('location:loginform.php');
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
 
     }

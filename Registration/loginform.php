@@ -1,3 +1,7 @@
+<?php
+    include('init.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +27,7 @@
 
             <div class="mb-3">
                 <label for="passwordLabel" class="form-label">Password</label>
-                <input type="text" class="form-control" name="password">
+                <input type="password" class="form-control" name="password">
                 <div id="passwordError" class="form-text"></div>
             </div>
 

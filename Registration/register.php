@@ -13,8 +13,10 @@
             $_SESSION['email'] = $email;
             $_SESSION['ageRange'] = $ageRange;
 
+           session_unset();
+
         if(isset($_POST['chkTandC'])){
-            $_SESSION['chkTandC'] = $_POST['chkTandC'];
+            $_SESSION['chkTandC'] = 'on';
             validUsername($username);
             validEmail($email);
             validPassword($password);
@@ -36,17 +38,16 @@
                     header("location:main.php");
                 }else{
                     $_SESSION['registrationError'] = "Could not register user";
-                    header('location:registration.php');
+                    header("Location: {$_SERVER['HTTP_REFERER']}");
                 }
             }else{
-                header('location:registration.php');
+                header("Location: {$_SERVER['HTTP_REFERER']}");
             }
 
             unset($_SESSION['chkTandCError']);
         }else{
             $_SESSION['chkTandCError'] = "<br>Please Agree the Terms and Condition";
-            unset($_SESSION['chkTandC']);
-            header('location:registration.php');
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
     }
 

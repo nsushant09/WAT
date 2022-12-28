@@ -87,11 +87,11 @@
             </div>
 
             <div class="mb-3">
-                <input type="checkbox" class="form-check-input" name="chkTandC" value="<?php
+                <input type="checkbox" class="form-check-input" name="chkTandC" <?php
                     if(isset($_SESSION['chkTandC'])){
                         if($_SESSION['chkTandC'] == 'on') echo("CHECKED");
                     }
-                ?>">
+                ?>>
                 <label for="chkTandCLabel" class="form-check-label">I agree the terms and conditions.</label>
                 <div id="chkTandCError" class="form-text"><?php
                     if(isset($_SESSION['chkTandCError'])){
