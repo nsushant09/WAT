@@ -21,7 +21,7 @@
 
         <!-- Nav bar that contains dashboard name and logout -->
         <nav class="navbar navbar-light justify-content-between">
-            <h2><?php
+            <h2 style="font-family:Trebuchet MS;"><?php
                 echo "Welcome, " .$_COOKIE['LOGGED_IN_ADMIN'];
             ?></h2>
             <?php
@@ -52,40 +52,10 @@
             </div>
 
             <div class="row justify-content-md-center" style="margin-top:16px;">
-            <label for="nameLabel" class="form-label">Device Category</label>
-            <div class="col-md-8">
-                    <!-- Dropdown to select category -->
-                    <select class="form-select" name="categoryDropdown" aria-label="Default select example">
-                        <option selected value="all">All</option>
-                        <option value="chromebook"<?php
-                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'all') echo "SELECTED";
-                        ?>>Chromebook</option>
-                        <option value="desktop_replacement"<?php
-                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'desktop_replacement') echo "SELECTED";
-                        ?>>Desktop Replacement</option>
-                        <option value="gaming"<?php
-                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'gaming') echo "SELECTED";
-                        ?>>Gaming</option>
-                        <option value="notebook"<?php
-                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'notebook') echo "SELECTED";
-                        ?>>Notebook</option>
-                        <option value="ultrabook"<?php
-                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'ultrabook') echo "SELECTED";
-                        ?>>Ultrabook</option>
-                        <option value="two_in_one"<?php
-                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'two_in_one') echo "SELECTED";
-                        ?>>2 in 1s</option>
-                    </select>
-            </div>
-            </div>
 
-            
-            
-            <div class="row justify-content-md-center" style="margin-top:16px;">
-
-                <div class="col-md-8">
-                <label for="nameLabel" class="form-label">Sort : </label>
+            <div class="col-md-4" style="margin-top:8px">
                     <!-- Radio Group to sort with name or price -->
+                    <label for="radioLabel">Sort : </label>
                     <div class="form-check form-check-inline">
                             <input class="form-check-input" value="nameSortRadio" type="radio" name="sortRadio" <?php
                                 if(isset($_POST['sortRadio'])){
@@ -113,25 +83,30 @@
                     </div>
 
                 </div>
+
+            <div class="col-md-4">
+                    <!-- Dropdown to select category -->
+                    <select class="form-select" name="categoryDropdown" aria-label="Default select example">
+                        <option selected value="all">Category</option>
+                        <option value="chromebook">Chromebook</option>
+                        <option value="desktop_replacement">Desktop Replacement</option>
+                        <option value="gaming">Gaming</option>
+                        <option value="notebook">Notebook</option>
+                        <option value="ultrabook">Ultrabook</option>
+                        <option value="two_in_one">2 in 1s</option>
+                    </select>
+            </div>
+
             </div>
 
 
-            <div class="d-grid gap-2 col-6 mx-auto">
+            <div class="d-grid gap-2 col-2 mx-auto">
                 <input type="submit" id="btnFilter"class="btn btn-primary" type="button" name="btnFilter" style="background-color:#061c34;margin:16px;" value="Filter">
             </div>
 
             </div>
 
         </form>
-
-        <div class="row">
-            <div class="col-9">
-                <h1>Items</h1>
-            </div>
-            <div class="col-3" style="text-align:end">
-                <a class="nav-link active" aria-current="page" href="addupdateform.php?action=add" style="color:#061c34">+ Insert an Item</a>
-            </div>
-        </div>
 
 
         <?php

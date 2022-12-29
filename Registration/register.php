@@ -31,9 +31,15 @@
                 $query = "INSERT INTO User(userName, userPassword, userEmail, userAgeRange) VALUES ('$username','$password','$email','$ageRange')";
 
                 if(mysqli_query($connection, $query)){
-                    setcookie("LOGGED_IN_USER", $username, time() + 600, "/");
-                    session_destroy();
+
+                    if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
+                        //if admin is logged in and registers then go back to admin dashboard 
+                    }else{
+                        setcookie("LOGGED_IN_USER", $username, time() + 600, "/");
+                        session_destroy();
+                    }
                     header("location:main.php");
+
                 }else{
                     $_SESSION['registrationError'] = "Could not register user";
                     header("Location: {$_SERVER['HTTP_REFERER']}");
@@ -82,7 +88,7 @@
             $_SESSION['passwordError'] = "Please enter a password<br>";
             return false;
         }else if(!preg_match($regexPattern, $password)){
-            $_SESSION['passwordError'] = "Please confirm that your password contains, At least one uppercase letter,one lowercase letter and one number<br>";
+            $_SESSION['passwordError'] = "Please confirm that your password contains<br>At least one uppercase letter,one lowercase letter and one number<br>";
             return false;
         }
         return true;

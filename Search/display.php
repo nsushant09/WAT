@@ -1,23 +1,79 @@
 <?php
 
     if(isset($_POST['btnSearch'])){
-       performDisplayOperation($connection);
+       performProductDisplayOperation($connection);
     }else if(isset($_POST['btnFilter'])){
-        performDisplayOperation($connection);
+        performProductDisplayOperation($connection);
     }else{
-        performDisplayOperation($connection);
+        performProductDisplayOperation($connection);
+
+        if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
+            performUserDisplayOperation($connection);
+        }
+
     }
 
+    function performUserDisplayOperation($connection){
+        titleWithInsertion('Users', '+ Insert an User', '../Registration/registration.php');
+        $query = "SELECT * FROM User WHERE userRole = 'user' ";
+        $result = mysqli_query($connection, $query);
+        if($result){
+            if(mysqli_num_rows($result) > 0){
 
-    function performDisplayOperation($connection){
+                echo('<table class="table"');
+                echo('<thead>');
+                echo('<tr>');
+                echo('<th scope="col">#</th>');
+                echo('<th scope="col">Username</th>');
+                echo('<th scope="col">Email</th>');
+                echo('<th scope="col">Age Range</th>');
+                echo('<th scope="col">Role</th>');
+                echo('<th scope="col">Status</th>');
+                echo('<th scope="col">Update</th>');
+                echo('<th scope="col">Delete</th>');
+                echo('</tr>');
+                echo('</thead>');
+                echo('<tbody>');
+                while($row = mysqli_fetch_assoc($result)){
+
+                    echo('<tr>');
+                    echo('<th scope="row">' .$row['userID'] .'</th>');
+                    echo('<td>' .$row['userName'] .'</td>');
+                    echo('<td>' .$row['userEmail'] .'</td>');
+                    echo('<td>' .$row['userAgeRange'] .'</td>');
+                    echo('<td>' .$row['userRole'] .'</td>');
+                    echo('<td>' .$row['userStatus'] .'</td>');
+                    echo('<td><a style="color:#061c34" href="amendProduct.php?id=' .$row['userID'] .'&action=edit">Update</a></td>');
+                    echo('<td><a style="color:#061c34" href="delete.php?id=' .$row['userID'] .'&action=user_delete">Delete</a></td>');
+                    echo('</tr>');
+
+                }
+
+                echo('</tbody>');
+                echo('</table>');
+
+            }else{
+                echo('<div class="container text-center">');
+                echo('<h4 class="display-4">No Users Found.</h4>');
+                echo('</div>');
+            }
+        }else{
+            echo('<div class="container text-center">');
+            echo('<h4 class="display-4">Error Requesting Process</h4>');
+            echo('</div>');
+        }
+    }
+
+    function performProductDisplayOperation($connection){
+        titleWithInsertion('Items', '+ Insert an Item', 'addupdateform.php?action=add');
 
         if(isset($_POST['searchValue'])){
-            $searchValue = $_POST['searchValue'];
+            $searchValue = secureString($_POST['searchValue']);
         }else{
             $searchValue = "";
         }
         if(isset($_POST['categoryDropdown'])){
-            $category = $_POST['categoryDropdown'];
+            $category = secureString($_POST['categoryDropdown']);
         }else{
             $category = 'all';
         }
@@ -94,9 +150,9 @@
 
         echo('<div class="card-body">');
 
-        echo('<h3 class="card-title">' .$item['name'] .'</h3>');
+        echo('<h2 class="card-title" style="font-family:Trebuchet MS;">' .$item['name'] .'</h2>');
 
-        echo('<h5 class="card-subtitle mb-2 text-muted">Rs ' .$item['price'] .'</h5>');
+        echo('<h5 class="card-subtitle mb-2 text-muted" style="font-family:Courier">Rs ' .$item['price'] .'</h5>');
 
         echo('<dl class="row">');
             echo('<dt class="col-sm-4">Brand</dt>');
@@ -145,6 +201,21 @@
                 return '2 in 1s';
                 
         }
+    }
+
+    function titleWithInsertion($title, $insertString, $insertLink){
+        echo('<div class="row">');
+            echo '<div class="col-9">';
+                echo '<h1 style="font-family:Trebuchet MS;">' .$title .'</h1>';
+            echo '</div>';
+
+            if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
+                echo '<div class="col-3" style="text-align:end">';
+                    echo '<a class="nav-link active" aria-current="page" href="' .$insertLink .'"style="color:#061c34;margin-top:8px;font-weight:bold;">' .$insertString .'</a>';
+                echo '</div>';
+            }
+            
+        echo '</div>';
     }
 
 ?>
