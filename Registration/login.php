@@ -2,13 +2,14 @@
     include("init.php");
     if(isset($_POST['btnSubmit'])){
         
-        $usernameLogin = $_POST['username'];
-        $passwordLogin = md5($_POST['password']);
+        $usernameLogin = secureString($_POST['username']);
+        $passwordLogin = md5(secureString($_POST['password']));
         $chkRemember = 'off';
         if(isset($_POST['chkRemember'])){
             $chkRemember = $_POST['chkRemember'];
         }
 
+        $_SESSION['username'] = $usernameLogin;
         $query = "SELECT * FROM User WHERE userName = '$usernameLogin' AND userPassword = '$passwordLogin' LIMIT 1";
         $result = mysqli_query($connection, $query);
         if($result){

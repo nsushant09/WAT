@@ -6,6 +6,18 @@
     $password = 'root';
     $databaseName = 'WAT';
     $connection = mysqli_connect($hostname, $username, $password, $databaseName) or die("Unable to connect to database!");
+
+    function secureString($string){
+        return trim(strip_tags(
+                htmlspecialchars(
+                    addslashes(
+                        htmlentities(
+                            $string
+                        )
+                    )
+                )
+            ));
+    }
 ?>
 
 <!-- Prefer this -->

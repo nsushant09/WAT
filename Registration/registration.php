@@ -27,11 +27,13 @@
                 <input type="text" class="form-control" name="username" value="<?php
                     if(isset($_SESSION['username'])){
                         echo $_SESSION['username'];
+                        unset($_SESSION['username']);
                     }
                     ?>">
                 <div id="usernameError" class="form-text"><?php
                     if(isset($_SESSION['usernameError'])){
                         echo $_SESSION['usernameError'];
+                        unset($_SESSION['usernameError']);
                     }
                 ?></div>
             </div>
@@ -41,24 +43,24 @@
                 <input type="email" class="form-control" name="email" value="<?php
                     if(isset($_SESSION['email'])){
                         echo $_SESSION['email'];
+                        unset($_SESSION['email']);
                     }
                 ?>">
                 <div id="emailError" class="form-text"><?php
                     if(isset($_SESSION['emailError'])){
                         echo $_SESSION['emailError'];
+                        unset($_SESSION['emailError']);
                     }
             ?></div>
             </div>
 
             <div class="mb-3">
                 <label for="passwordLabel" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" value="<?php
-                    if(isset($_SESSION['password'])){
-                        echo $_SESSION['password'];
-                    }?>">
+                <input type="password" class="form-control" name="password">
                 <div id="passwordError" class="form-text"><?php
                     if(isset($_SESSION['passwordError'])){
                         echo $_SESSION['passwordError'];
+                        unset($_SESSION['passwordError']);
                     }
                 ?></div>
             </div>
@@ -79,9 +81,13 @@
                     if(isset($_SESSION['ageRange']) && $_SESSION['ageRange'] == 'aged') echo "SELECTED";
                 ?>>60+</option>
             </select>
+            <?php
+                unset($_SESSION['ageRange']);
+            ?>
                 <div id="ageRangeError" class="form-text"><?php
                     if(isset($_SESSION['ageRangeError'])){
                         echo $_SESSION['ageRangeError'];
+                        unset($_SESSION['ageRangeError']);
                     }
             ?></div>
             </div>
@@ -90,12 +96,14 @@
                 <input type="checkbox" class="form-check-input" name="chkTandC" <?php
                     if(isset($_SESSION['chkTandC'])){
                         if($_SESSION['chkTandC'] == 'on') echo("CHECKED");
+                        unset($_SESSION['chkTandC']);
                     }
                 ?>>
                 <label for="chkTandCLabel" class="form-check-label">I agree the terms and conditions.</label>
                 <div id="chkTandCError" class="form-text"><?php
                     if(isset($_SESSION['chkTandCError'])){
                         echo $_SESSION['chkTandCError'];
+                        unset($_SESSION['chkTandCError']);
                     }
                 ?></div>
             </div>

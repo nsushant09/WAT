@@ -27,7 +27,12 @@
         <form action="login.php" method="POST">
             <div class="mb-3">
                 <label for="usernameLabel" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username">
+                <input type="text" class="form-control" name="username" value="<?php
+                    if(isset($_SESSION['username'])){
+                        echo $_SESSION['username'];
+                        unset($_SESSION['username']);
+                    }
+                ?>">
                 <div id="usernameError" class="form-text"></div>
             </div>
 

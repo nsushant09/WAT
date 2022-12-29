@@ -5,11 +5,11 @@
 
         eraseSessionErrors();
 
-        $name = trim($_POST['name']);
-        $price = trim($_POST['price']);
-        $category = trim($_POST['category']);
-        $brand = trim($_POST['brand']);
-        $size = trim($_POST['size']);
+        $name = secureString($_POST['name']);
+        $price = secureString($_POST['price']);
+        $category = secureString($_POST['category']);
+        $brand = secureString($_POST['brand']);
+        $size = secureString($_POST['size']);
 
         $image = $_FILES['image']['name'];
         $imageSize = $_FILES['image']['size'];

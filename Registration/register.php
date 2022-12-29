@@ -3,17 +3,15 @@
 
     if(isset($_POST['btnSubmit'])){
 
-            $username = trim($_POST['username']);
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-            $ageRange = $_POST['ageRange'];
+            $username = secureString($_POST['username']);
+            $email = secureString($_POST['email']);
+            $password = secureString($_POST['password']);
+            $ageRange = secureString($_POST['ageRange']);
 
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
             $_SESSION['email'] = $email;
             $_SESSION['ageRange'] = $ageRange;
-
-           session_unset();
 
         if(isset($_POST['chkTandC'])){
             $_SESSION['chkTandC'] = 'on';
@@ -44,7 +42,6 @@
                 header("Location: {$_SERVER['HTTP_REFERER']}");
             }
 
-            unset($_SESSION['chkTandCError']);
         }else{
             $_SESSION['chkTandCError'] = "<br>Please Agree the Terms and Condition";
             header("Location: {$_SERVER['HTTP_REFERER']}");
@@ -63,7 +60,6 @@
             return false;
         }
 
-        unset($_SESSION['usernameError']);
         return true;
     }
 
@@ -76,7 +72,6 @@
             $_SESSION['emailError'] = "Invalid Email Address<br>";
             return false;
         }
-        unset($_SESSION['emailError']);
         return true;
     }
 
@@ -90,7 +85,6 @@
             $_SESSION['passwordError'] = "Please confirm that your password contains, At least one uppercase letter,one lowercase letter and one number<br>";
             return false;
         }
-        unset($_SESSION['passwordError']);
         return true;
     }
 
@@ -99,7 +93,6 @@
             $_SESSION['ageRangeError'] = "Please select an age range<br>";
             return false;
         }
-        unset($_SESSION['ageRangeError']);
         return true;
     }
 ?>
