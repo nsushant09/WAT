@@ -15,6 +15,12 @@
 <body>
 
     <div class="container">
+            <?php
+                if(isset($_SESSION['loginError'])){
+                    echo('<div class ="alert alert-danger" role="alert">' .$_SESSION['loginError'] .'</div>');
+                    unset($_SESSION['loginError']);
+                } 
+            ?>
         <div class="h1">
             Login
         </div>
@@ -35,12 +41,6 @@
                 <input type="checkbox" class="form-check-input" name="chkRemember">
                 <label for="chkRemember" class="form-check-label">Remember me</label>
             </div>
-
-            <?php
-                if(isset($_SESSION['loginError'])){
-                    echo('<div class ="alert alert-danger" role="alert">' .$_SESSION['loginError'] .'</div>');
-                } 
-            ?>
 
             <div class="mb-3">
                 <input type="submit" class="btn btn-primary" id="submitButtonID" value="Submit" name="btnSubmit">

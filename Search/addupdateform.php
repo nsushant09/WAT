@@ -1,8 +1,16 @@
 <?php
     include('init.php');
+
     $action = $_GET['action'];
 
     if($action == 'add'){
+        unset($_SESSION['name']);
+        unset($_SESSION['brand']);
+        unset($_SESSION['size']);
+        unset($_SESSION['category']);
+        unset($_SESSION['price']);
+        unset($_SESSION['isInStock']);
+
     }else{
         $id = $_GET['id'];
         $query = "SELECT * FROM Laptop WHERE id = '$id' LIMIT 1";
@@ -38,8 +46,9 @@
     <div class="container">
 
         <?php
-            if(isset($_SESSION['addUpdateMessage'])){
-                echo('<div class ="alert alert-dark" role="alert">' .$_SESSION['addUpdateMessage'] .'</div>');
+            if(isset($_SESSION['addUpdateFormMessage'])){
+                echo('<div class ="alert alert-dark" role="alert">' .$_SESSION['addUpdateFormMessage'] .'</div>');
+                unset($_SESSION['addUpdateFormMessage']);
             } 
         ?>
 

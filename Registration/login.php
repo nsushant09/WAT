@@ -13,6 +13,10 @@
         $result = mysqli_query($connection, $query);
         if($result){
 
+            if(mysqli_num_rows($result) == 0){
+                $_SESSION['loginError'] = "Invalid Username or Password";
+            }
+
             while($row = mysqli_fetch_assoc($result)){
                 if($row['userRole'] == 'user'){
                     if($chkRemember == 'on'){
@@ -32,7 +36,7 @@
             }
             header('location:main.php');
         }else{
-            $_SESSION['loginError'] = "<br>Invalid Username or Password";
+            $_SESSION['loginError'] = "Could not fetch data";
             header("Location: {$_SERVER['HTTP_REFERER']}");
         }
 

@@ -1,6 +1,5 @@
 <?php
-
-// start session here 
+    session_start();
     $hostname = 'localhost:8889';
     $username = 'root';
     $password = 'root';

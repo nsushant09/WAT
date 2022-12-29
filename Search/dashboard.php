@@ -1,4 +1,5 @@
 <?php
+    include("init.php");
     if(!isset($_COOKIE['LOGGED_IN_USER'])){
         header('location:../Registration/loginform.php');
     }
@@ -20,56 +21,35 @@
 
         <!-- Nav bar that contains dashboard name and logout -->
         <nav class="navbar navbar-light justify-content-between">
-            <h2>Dashboard</h2>
+            <h2><?php
+                echo "Welcome, " .$_COOKIE['LOGGED_IN_USER'];
+            ?></h2>
             <?php
                 if(isset($_SESSION['dashboardMessage'])){
                     echo('<div class ="alert alert-dark" role="alert">' .$_SESSION['dashboardMessage'] .'</div>');
+                    unset($_SESSION['dashboardMessage']);
                 } 
             ?>
             <a class="nav-link active" aria-current="page" href="../Registration/logout.php" style="color:#061c34">Logout</a>
         </nav>
 
+
         <!-- Form for actions, div that contains searching methods i.e radio, dropdown text -->
-        <form action="display.php" method="POST">
+        <form action="" method="POST">
             <div class="container text-center">
 
-            <figure class="text-center">
-                <h4>Search & Sort</h4>
-            </figure>
-            
-            <div class="row" >
-
-                <div class="col">
-                    <!-- Radio Group to sort with name or price -->
-                    <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sortNameRadio" <?php
-                                if(isset($_POST['sortPriceRadio'])){
-                                    if($_POST['sortPriceRadio'] == 'on') {
-                                        echo "UNCHECKED";
-                                    }else {
-                                        echo "CHECKED";
-                                    }
-                                } 
-                            ?>>
-                            <label class="form-check-label" for="flexRadioDefault1">Name</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sortPriceRadio" <?php
-                                if(isset($_POST['sortNameRadio'])){
-                                    if($_POST['sortNameRadio'] == 'on') {
-                                        echo "UNCHECKED";
-                                    }else {
-                                        echo "CHECKED";
-                                    }
-                                } 
-                            ?>>
-                            <label class="form-check-label" for="flexRadioDefault2">Price</label>
-                    </div>
+            <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <div class="d-flex form-inputs">
+                    <input class="form-control" type="text" placeholder="Search any product..." name="searchValue">
+                    <i class="bx bx-search"></i>
                 </div>
+            </div>
+            </div>
 
-
-                <div class="col">
+            <div class="row justify-content-md-center" style="margin-top:16px;">
+            <label for="nameLabel" class="form-label">Device Category</label>
+            <div class="col-md-8">
                     <!-- Dropdown to select category -->
                     <select class="form-select" name="categoryDropdown" aria-label="Default select example">
                         <option selected value="all">All</option>
@@ -80,15 +60,43 @@
                         <option value="ultrabook">Ultrabook</option>
                         <option value="two_in_one">2 in 1s</option>
                     </select>
-                </div>
+            </div>
+            </div>
 
-                <div class="col-4">
-                    <div class="input-group rounded">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="min-width:250px"/>
-                        <input class="input-group-text border-0" id="search-addon" name="btnSearch" type="Submit" value="Search"/>
+            
+            
+            <div class="row justify-content-md-center" style="margin-top:16px;">
+
+                <div class="col-md-8">
+                <label for="nameLabel" class="form-label">Sort : </label>
+                    <!-- Radio Group to sort with name or price -->
+                    <div class="form-check form-check-inline">
+                            <input class="form-check-input" value="nameSortRadio" type="radio" name="sortRadio" <?php
+                                if(isset($_POST['sortRadio'])){
+                                    if($_POST['sortRadio'] == 'on') {
+                                        echo "UNCHECKED";
+                                    }else {
+                                        echo "CHECKED";
+                                    }
+                                } 
+                            ?>>
+                            <label class="form-check-label" for="flexRadioDefault1">Name</label>
                     </div>
-                </div>
 
+                    <div class="form-check form-check-inline">
+                            <input class="form-check-input" value="priceSortRadio" type="radio" name="sortRadio" <?php
+                                if(isset($_POST['sortRadio'])){
+                                    if($_POST['sortRadio'] == 'on') {
+                                        echo "UNCHECKED";
+                                    }else {
+                                        echo "CHECKED";
+                                    }
+                                } 
+                            ?>>
+                            <label class="form-check-label" for="flexRadioDefault2">Price</label>
+                    </div>
+
+                </div>
             </div>
 
 
@@ -100,12 +108,18 @@
 
         </form>
 
-        <figure class="text-center">
-                <h4>Items</h4>
-        </figure>
+        <div class="row">
+            <div class="col-9">
+                <h1>Items</h1>
+            </div>
+            <div class="col-3" style="text-align:end">
+                <a class="nav-link active" aria-current="page" href="addupdateform.php?action=add" style="color:#061c34">+ Insert an Item</a>
+            </div>
+        </div>
 
-        <?
-            include_once('display.php');
+
+        <?php
+            include('display.php');
         ?>
     
     </div>

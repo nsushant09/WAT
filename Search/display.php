@@ -1,19 +1,26 @@
 <?php
-     include("init.php");
 
     if(isset($_POST['btnSearch'])){
        performDisplayOperation($connection);
-    }
-
-    if(isset($_POST['btnFilter'])){
+    }else if(isset($_POST['btnFilter'])){
+        performDisplayOperation($connection);
+    }else{
         performDisplayOperation($connection);
     }
 
 
     function performDisplayOperation($connection){
 
-        $searchValue = $_POST['searchValue'];
-        $category = $_POST['categoryDropdown'];
+        if(isset($_POST['searchValue'])){
+            $searchValue = $_POST['searchValue'];
+        }else{
+            $searchValue = "";
+        }
+        if(isset($_POST['categoryDropdown'])){
+            $category = $_POST['categoryDropdown'];
+        }else{
+            $category = 'all';
+        }
 
         $query = "SELECT * FROM Laptop ";
 
@@ -29,10 +36,13 @@
             }
         }
 
-        if(isset($_POST['sortNameRadio'])){
-            $query = $query ."ORDER BY name ";
-        }else if(isset($_POST['sortPriceRadio'])){
-            $query = $query ."ORDER BY price ";
+        if(isset($_POST['sortRadio'])){
+
+            if($_POST['sortRadio'] == 'nameSortRadio'){
+                $query = $query ."ORDER BY name ";
+            }else if($_POST['sortRadio'] == 'priceSortRadio'){
+                $query = $query ."ORDER BY price";
+            }
         }
 
         $result = mysqli_query($connection, $query);
@@ -43,14 +53,14 @@
     
                 //Setting up for row
                 echo('<div class="container">');
-                echo('<div class="row">');
+                echo('<div class="row" >');
     
                 while($row = mysqli_fetch_assoc($result)){
     
                     if($count % 3 == 0 ){
                         //TODO:Create new row and display
                         echo('</div>');
-                        echo('<div class="row">');
+                        echo('<div class="row" style="margin-bottom:32px;margin-top:32px">');
                     }
                     //TODO: Show card and all
                     displayCard($row);
@@ -61,10 +71,14 @@
                 echo('</div>');
                 echo('</div>');
             }else{
-                echo('<h3 class="display-3">No Results Found.</h3>');
+                echo('<div class="container text-center">');
+                echo('<h4 class="display-4">No Results Found.</h4>');
+                echo('</div>');
             }
         }else{
-            echo('<h3 class="display-3">Error Requesting Process</h3>');
+            echo('<div class="container text-center">');
+            echo('<h4 class="display-4">Error Requesting Process</h4>');
+            echo('</div>');
         }
 
     }
@@ -72,11 +86,13 @@
     function displayCard($item){
 
         echo('<div class="col">');
-        echo('<div class="card" style="width:20rem;padding:8px 16px 8px 16px;"');
+        echo('<div class="card" style="width:22rem;padding:16px;"');
 
-        echo ('<img class="card-img-top" src="laptop_images/' .$item['image'] .'" width="80%"');
+        echo ('<img src="laptop_images/razerblade15.jpeg" class="card-img-top" alt="random" style="max-width:80%"/>');
 
-        echo('<h5 class="card-title">' .$item['name'] .'</h5>');
+        echo('<div class="card-body">');
+
+        echo('<h4 class="card-title">' .$item['name'] .'</h4>');
 
         echo('<h6 class="card-subtitle mb-2 text-muted">Rs ' .$item['price'] .'</h6>');
 
@@ -96,9 +112,10 @@
             echo('<a class="" href="delete.php?action=delete&id=' .$item['id'] .'" style="color:#061c34">Delete</a>');
             echo('</div>'); 
         }
-
-        echo('</div>');
-        echo('</div>');
+        
+        echo('</div>'); //card body end
+        echo('</div>'); //card end
+        echo('</div>'); //col end
     }
 
     function categoryName($category){
