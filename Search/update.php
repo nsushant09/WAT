@@ -26,7 +26,12 @@
         $query = "UPDATE Laptop SET name = '$name' , price = '$price', image = '$image', category = '$category', brand = '$brand', size = '$size', instock = '$instock', updated_at = '$updatedAt' WHERE id = '$id'";
 
         if(mysqli_query($connection, $query)){
-            $_SESSION['addUpdateFormMessage'] = "Data Updated Sucessfully"; 
+            
+            if(move_uploaded_file($imageTempName, $location)){
+                $_SESSION['addUpdateFormMessage'] = "Data Updated Sucessfully along with Image"; 
+            }else{
+                $_SESSION['addUpdateFormMessage'] = "Data Updated Sucessfully without Image"; 
+            }
 
         }else{
             $_SESSION['addUpdateFormMessage'] = mysqli_error($connection);
