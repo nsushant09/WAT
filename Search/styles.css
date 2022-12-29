@@ -4,11 +4,11 @@ body{
     justify-content:center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .container{
-    background-color: white;
+    background-color: whitesmoke;
     border-radius: 32px;
     padding: 32px;
     box-shadow: #061c34;
@@ -56,3 +56,13 @@ a{
     background: #061c34;
     margin: 16px;
 }
+
+#itemDisplayCard{
+    border: 1px solid #1d385550;
+    border-radius: 16px;
+    padding:16px;
+    margin-right:8px;
+    background-color: #061c34;
+}
+
+/* style="border:2px solid #061c34aa;border-radius:32px;padding:16px;margin-right:8px;" */

@@ -85,16 +85,18 @@
 
     function displayCard($item){
 
+        // style="border:1px solid #1d385550;border-radius:32px;padding:16px;margin-right:16px;">
         echo('<div class="col">');
-        echo('<div class="card" style="width:22rem;padding:16px;"');
+        
+        echo('<div style="width:22rem;padding:16px" class="card">');
 
-        echo ('<img src="laptop_images/razerblade15.jpeg" class="card-img-top" alt="random" style="max-width:80%"/>');
+        echo ('<img src="laptop_images/' .$item['image'] .'" class="card-img-top" alt="' .$item['name'] .'" style="max-width:100%;max-height: 300px"/>');
 
         echo('<div class="card-body">');
 
-        echo('<h4 class="card-title">' .$item['name'] .'</h4>');
+        echo('<h3 class="card-title">' .$item['name'] .'</h3>');
 
-        echo('<h6 class="card-subtitle mb-2 text-muted">Rs ' .$item['price'] .'</h6>');
+        echo('<h5 class="card-subtitle mb-2 text-muted">Rs ' .$item['price'] .'</h5>');
 
         echo('<dl class="row">');
             echo('<dt class="col-sm-4">Brand</dt>');

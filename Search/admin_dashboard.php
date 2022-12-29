@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="styles.css">
     <title>Admin Dashboard</title>
 </head>
-<body>
-    <div class="container" style="margin:32px auto 32px auto">
+<body style="background-color:white;">
+    <div class="container" style="margin:32px auto 32px auto;">
 
         <!-- Nav bar that contains dashboard name and logout -->
         <nav class="navbar navbar-light justify-content-between">
@@ -41,7 +41,11 @@
             <div class="row justify-content-md-center">
             <div class="col-md-8">
                 <div class="d-flex form-inputs">
-                    <input class="form-control" type="text" placeholder="Search any product..." name="searchValue">
+                    <input class="form-control" type="text" placeholder="Search any product..." name="searchValue" value="<?php
+                        if(isset($_POST['searchValue'])){
+                            echo $_POST['searchValue'];
+                        }
+                    ?>">
                     <i class="bx bx-search"></i>
                 </div>
             </div>
@@ -53,12 +57,24 @@
                     <!-- Dropdown to select category -->
                     <select class="form-select" name="categoryDropdown" aria-label="Default select example">
                         <option selected value="all">All</option>
-                        <option value="chromebook">Chromebook</option>
-                        <option value="desktop_replacement">Desktop Replacement</option>
-                        <option value="gaming">Gaming</option>
-                        <option value="notebook">Notebook</option>
-                        <option value="ultrabook">Ultrabook</option>
-                        <option value="two_in_one">2 in 1s</option>
+                        <option value="chromebook"<?php
+                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'all') echo "SELECTED";
+                        ?>>Chromebook</option>
+                        <option value="desktop_replacement"<?php
+                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'desktop_replacement') echo "SELECTED";
+                        ?>>Desktop Replacement</option>
+                        <option value="gaming"<?php
+                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'gaming') echo "SELECTED";
+                        ?>>Gaming</option>
+                        <option value="notebook"<?php
+                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'notebook') echo "SELECTED";
+                        ?>>Notebook</option>
+                        <option value="ultrabook"<?php
+                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'ultrabook') echo "SELECTED";
+                        ?>>Ultrabook</option>
+                        <option value="two_in_one"<?php
+                        if(isset($_SESSION['categoryDropdown']) && $_SESSION['categoryDropdown'] == 'two_in_one') echo "SELECTED";
+                        ?>>2 in 1s</option>
                     </select>
             </div>
             </div>
