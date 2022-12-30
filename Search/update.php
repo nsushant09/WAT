@@ -2,12 +2,12 @@
 
     include("init.php");
 
-        $id = secureString($_POST['id']);
-        $name = secureString($_POST['name']);
-        $price = secureString($_POST['price']);
-        $category = secureString($_POST['category']);
-        $brand = secureString($_POST['brand']);
-        $size = secureString($_POST['size']);
+        $id = secureString($_POST['id'], FILTER_SANITIZE_INT);
+        $name = secureString($_POST['name'],, FILTER_SANITIZE_STRING);
+        $price = secureString($_POST['price'], FILTER_SANITIZE_FLOAT);
+        $category = secureString($_POST['category'], FILTER_SANITIZE_STRING);
+        $brand = secureString($_POST['brand'], FILTER_SANITIZE_STRING);
+        $size = secureString($_POST['size'], FILTER_SANITIZE_FLOAT);
         $instock = 0;
         if(isset($_POST['chkIsInStock'])){
             $_POST['chkIsInStock'] == 'on' ? $instock = 1 : $instock = 0;

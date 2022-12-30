@@ -2,8 +2,8 @@
     include("init.php");
     if(isset($_POST['btnSubmit'])){
         
-        $usernameLogin = secureString($_POST['username']);
-        $passwordLogin = md5(secureString($_POST['password']));
+        $usernameLogin = secureString($_POST['username'], FILTER_SANITIZE_STRING);
+        $passwordLogin = md5(secureString($_POST['password'], FILTER_SANITIZE_STRING));
         $chkRemember = 'off';
         if(isset($_POST['chkRemember'])){
             $chkRemember = $_POST['chkRemember'];

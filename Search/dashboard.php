@@ -11,7 +11,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/094c35d6d0.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <title>Dashboard</title>
@@ -46,7 +45,6 @@
                             echo $_POST['searchValue'];
                         }
                     ?>">
-                    <i class="bx bx-search"></i>
                 </div>
             </div>
             </div>
@@ -87,14 +85,29 @@
             <div class="col-md-4">
                     <!-- Dropdown to select category -->
                     <select class="form-select" name="categoryDropdown" aria-label="Default select example">
-                        <option selected value="all">Category</option>
-                        <option value="chromebook">Chromebook</option>
-                        <option value="desktop_replacement">Desktop Replacement</option>
-                        <option value="gaming">Gaming</option>
-                        <option value="notebook">Notebook</option>
-                        <option value="ultrabook">Ultrabook</option>
-                        <option value="two_in_one">2 in 1s</option>
+                        <option selected value="all" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'all') echo "SELECTED";
+                        ?>>Category</option>
+                        <option value="chromebook" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'chromebook') echo "SELECTED";
+                        ?>>Chromebook</option>
+                        <option value="desktop_replacement" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'desktop_replacement') echo "SELECTED";
+                        ?>>Desktop Replacement</option>
+                        <option value="gaming" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'gaming') echo "SELECTED";
+                        ?>>Gaming</option>
+                        <option value="notebook" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'notebook') echo "SELECTED";
+                        ?>>Notebook</option>
+                        <option value="ultrabook" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'ultrabook') echo "SELECTED";
+                        ?>>Ultrabook</option>
+                        <option value="two_in_one" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'two_in_one') echo "SELECTED";
+                        ?>>2 in 1s</option>
                     </select>
+                    
             </div>
 
             </div>

@@ -1,5 +1,26 @@
 <?php
     include('init.php');
+
+
+    if(isset($_GET['action']) && $_GET['action'] == 'update'){
+        $action = $_GET['action'];
+        $id = $_GET['id'];
+        $query = "SELECT * FROM User WHERE userID = '$id' LIMIT 1";
+        $result = mysqli_query($connection, $query);
+
+        if($result){
+            while($row = mysqli_fetch_assoc($result)){
+                $_SESSION['username'] = $row['userName'];
+                $_SESSION['email'] = $row['userEmail'];
+                $_SESSION['ageRange'] = $row['userAgeRange'];
+                $_SESSION['chkTandC'] = $row['userStatus'];
+            }
+        }else{
+            $_SESSION['registrationUpdateMessage'] = "Could not fetch Data";
+        }
+    }else{
+        $action = 'add';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,18 +30,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-    <title>Registration</title>
+    <title><?php
+        if($action == 'add'){
+            echo "Registration";
+        }else{
+            echo "User Update";
+        }
+    ?></title>
 </head>
 <body>
 
     <div class="container">
         <?php
-            if(isset($_SESSION['registrationError'])){
-                echo('<div class ="alert alert-danger" role="alert">' .$_SESSION['registrationError'] .'</div>');
+            if(isset($_SESSION['registrationUpdateMessage'])){
+                echo('<div class ="alert alert-dark" role="alert">' .$_SESSION['registrationUpdateMessage'] .'</div>');
+                unset($_SESSION['registrationUpdateMessage']);
             } 
         ?>
-        <div class="h1">Register</div>
-        <form action="register.php" method="POST">
+        <div class="h1"><?php
+            if($action == 'add'){
+                echo "Register";
+            }else{
+                echo "Update";
+            }
+        ?></div>
+        <form action="<?php
+            if($action == 'add'){
+                echo "register.php";
+            }else{
+                echo "update_user.php";
+            }
+        ?>" method="POST">
+
+            <?php
+                if($action == 'update'){
+                    echo('<div class="mb-3">');
+                    echo('<input type="hidden" name="id" value="'.$id .'"');
+                    echo('</div>');
+
+                    echo('<div class="mb-3">');
+                    echo('<input type="hidden" name="status" value="'.$_SESSION['chkTandC'] .'"');
+                    echo('</div>');
+                }
+            ?>
 
             <div class="mb-3">
                 <label for="usernameLabel" class="form-label">Username</label>
@@ -54,16 +106,22 @@
             ?></div>
             </div>
 
-            <div class="mb-3">
-                <label for="passwordLabel" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
-                <div id="passwordError" class="form-text"><?php
-                    if(isset($_SESSION['passwordError'])){
-                        echo $_SESSION['passwordError'];
-                        unset($_SESSION['passwordError']);
-                    }
-                ?></div>
-            </div>
+            <?php
+
+                if($action == 'add'){
+                    echo '<div class="mb-3">';
+                    echo '<label for="passwordLabel" class="form-label">Password</label>';
+                    echo '<input type="password" class="form-control" name="password" value="">';
+                    echo '<div id="passwordError" class="form-text">';
+                        if(isset($_SESSION['passwordError'])){
+                            echo $_SESSION['passwordError'];
+                            unset($_SESSION['passwordError']);
+                        }
+                    echo '</div>';
+                    echo '</div>';
+                }
+
+            ?>
 
             <div class="mb-3">
                 <label for="ageRangeLabel" class="form-label">Age</label>
@@ -93,13 +151,25 @@
             </div>
 
             <div class="mb-3">
-                <input type="checkbox" class="form-check-input" name="chkTandC" <?php
+                <input type="checkbox" class="form-check-input" name="<?php
+                    if($action == 'add'){
+                        echo('chkTandC');
+                    }else{
+                        echo('status');
+                    }
+                ?>" <?php
                     if(isset($_SESSION['chkTandC'])){
-                        if($_SESSION['chkTandC'] == 'on') echo("CHECKED");
+                        if($_SESSION['chkTandC'] == 'on' || $_SESSION['chkTandC'] == 'active') echo("CHECKED");
                         unset($_SESSION['chkTandC']);
                     }
                 ?>>
-                <label for="chkTandCLabel" class="form-check-label">I agree the terms and conditions.</label>
+                <label for="chkTandCLabel" class="form-check-label"><?php
+                    if($action == 'add'){
+                        echo 'I agree the terms and conditions.';
+                    }else{
+                        echo 'User Status [ACTIVE]';
+                    }
+                ?></label>
                 <div id="chkTandCError" class="form-text"><?php
                     if(isset($_SESSION['chkTandCError'])){
                         echo $_SESSION['chkTandCError'];
@@ -109,13 +179,28 @@
             </div>
 
             <div class="mb-3">
-                <input type="submit" class="btn btn-primary" id="submitButtonID" value="Submit" name="btnSubmit">
+                <input type="submit" class="btn btn-primary" id="submitButtonID" value="<?php
+                    if($action == 'add'){
+                        echo "Register";
+                    }else{
+                        echo "Update";
+                    }
+                ?>" name="btnSubmit">
+
+
                 <input type="reset" class="btn btn-outline-primary" id="cancelButtonID" value="Cancel" name="btnCancel">
+
             </div>
 
         </form>
 
-        <div id="extrasNoteID">Already a user? <a href="loginform.php">Login</a></div>
+        <?php
+            if($action == 'add' && !isset($_COOKIE['LOGGED_IN_ADMIN'])){
+                echo ('<div id="extrasNoteID">Already a user? <a href="loginform.php">Login</a></div>');
+            }else{
+                echo ('<div id="extrasNoteID">Back to <a href="main.php">Dashboard</a></div>');
+            }
+        ?>
 
     </div>
     

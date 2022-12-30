@@ -3,6 +3,21 @@
     if(!isset($_COOKIE['LOGGED_IN_ADMIN'])){
         header('location:../Registration/loginform.php');
     }
+
+    $userQuery = "SELECT * FROM User WHERE userRole = 'user'";
+    $itemQuery = "SELECT * FROM Laptop";
+
+    $itemCount = -1;
+    $userCount = -1;
+
+    if($result = mysqli_query($connection, $itemQuery)){
+        $itemCount = mysqli_num_rows($result);
+    }
+
+    if($result = mysqli_query($connection, $userQuery)){
+        $userCount = mysqli_num_rows($result);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +26,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/094c35d6d0.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <title>Admin Dashboard</title>
@@ -87,26 +101,71 @@
             <div class="col-md-4">
                     <!-- Dropdown to select category -->
                     <select class="form-select" name="categoryDropdown" aria-label="Default select example">
-                        <option selected value="all">Category</option>
-                        <option value="chromebook">Chromebook</option>
-                        <option value="desktop_replacement">Desktop Replacement</option>
-                        <option value="gaming">Gaming</option>
-                        <option value="notebook">Notebook</option>
-                        <option value="ultrabook">Ultrabook</option>
-                        <option value="two_in_one">2 in 1s</option>
+                        <option selected value="all" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'all') echo "SELECTED";
+                        ?>>Category</option>
+                        <option value="chromebook" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'chromebook') echo "SELECTED";
+                        ?>>Chromebook</option>
+                        <option value="desktop_replacement" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'desktop_replacement') echo "SELECTED";
+                        ?>>Desktop Replacement</option>
+                        <option value="gaming" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'gaming') echo "SELECTED";
+                        ?>>Gaming</option>
+                        <option value="notebook" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'notebook') echo "SELECTED";
+                        ?>>Notebook</option>
+                        <option value="ultrabook" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'ultrabook') echo "SELECTED";
+                        ?>>Ultrabook</option>
+                        <option value="two_in_one" <?php
+                        if(isset($_POST['categoryDropdown']) && $_POST['categoryDropdown'] == 'two_in_one') echo "SELECTED";
+                        ?>>2 in 1s</option>
                     </select>
+
             </div>
 
             </div>
 
 
             <div class="d-grid gap-2 col-2 mx-auto">
-                <input type="submit" id="btnFilter"class="btn btn-primary" type="button" name="btnFilter" style="background-color:#061c34;margin:16px;" value="Filter">
+                    <input type="submit" id="btnFilter"class="btn btn-primary" type="button" name="btnFilter" style="background-color:#061c34;margin:16px;" value="Filter">
             </div>
 
             </div>
 
         </form>
+
+        <div class="container text-center">
+            <div class="row justify-content-md-center">
+                <div class="col">
+                    <a href="#itemsID">
+                    <div class = "card" style="background-color:#061c34;">
+                        <div class="card-body">
+                            <h1 style="font-family:Trebuchet MS;font-size:256px;color:white"><?php
+                                echo $itemCount;
+                            ?></h1>
+                            <h1 style="font-family:Trebuchet MS;font-size:96px;color:whitesmoke">Items</h1>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="col">
+                    <a href="#userTableID">
+                    <div class="card" style="background-color:#061c34;">
+                        <div class="card-body">
+                            <h1 style="font-family:Courier;font-size:256px;color:white"><?php
+                                echo $userCount;
+                            ?></h1>
+                            <h1 style="font-family:Trebuchet MS;font-size:96px;color:whitesmoke">Users</h1>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>   
+        </div>
 
 
         <?php

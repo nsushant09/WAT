@@ -198,7 +198,7 @@
 		?>
       </section>
       <footer>   
-         <small> <a href="./">Home</a></small>
+         <small> <a href="../index.html">Home</a></small>
       </footer>
    </body>
 </html>

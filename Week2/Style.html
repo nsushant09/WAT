@@ -1,52 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/WeeklyAssignment/Week2/style.css" type="text/css" rel="stylesheet"/>
-    <title>Style</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSS</title>
+        <style>
+            .font 
+                {
+                    color:green;
+                    font-size:x-large;
+                    font-family:monospace;
+                    margin-left:35px;
+                    letter-spacing:1px;                  
+                }
+        </style>
 
-    <style>
-        #preGreen{
-            color: green;
-        }
-    </style>
-</head>
-<body>
-    <h1>Fundamentals of CSS</h1>
-    <h3>Cascading</h3>
-    <p style="font-weight: 800;">Style can be added as an inline element using the style attribute on tags as is the case for this paragraph. Here font-weight has been given a weight of 800.</p>
-    <p>
-        <pre id="preGreen">
-            The inline style takes precedent over all other style 
-            declarations. Next in order of precedent is the embeded 
-            style. This uses style tags and is often found in the 
-            header section of a page. This pre tag is styled with 
-            embedded style. An extra large green font.
-        </pre>
-    </p>
-    <p>Ideally style is held seperate to structure in a style sheet. Other than the 2 examples above all other style on this page is in a seperate style sheet. Including the change of base font to Arial.</p>
-    <h3 id="boldH3">Selectors</h3>
-    <p>CSS selectors are used to apply style. There is the element selector, class selector and id selector. All being well you have used an element selector to modify the font on this page by adding style to the body tag in your attached style sheet. Words in this <span class="purpleSpacedWords">sentence</span> have been <span class="purpleSpacedWords"> styled</span>using a class selector applied to letter-spacing and the heading for this section with an id selector.</p>
-    <h3>Box Model</h3>
+        <link rel="stylesheet" href = "style.css">
+    </head>
 
-    <ul style="list-style-type: none;">
-        <li> <a href="https://www.tutorialrepublic.com/html-tutorial/">https://www.tutorialrepublic.com/html-tutorial/</a> </li>
-        <li> <a href="https://www.tutorialrepublic.com/css-tutorial/">https://www.tutorialrepublic.com/css-tutorial/</a> </li>
-        <li>  <a href="https://www.w3schools.com">https://www.w3schools.com</a> </li>
-    </ul>
-    <p>The links above are held in a list that is restyled to remove list-style type and display inline. Padding, margin and border are then added as appropriate.</p>
-    <h3>Layout</h3>
+    <body>
 
-    <div style="margin-bottom: 100px;">
-        <p class="col20">There words are in column 1</p>
-        <p class="col50">These words are in column 2</p>
-        <p class="col30">These words are in column 3</p>
-    </div>
+        <h1>Fundamentals of CSS</h1>
+        <h2>Cascading</h2>
+        <p style = "font-weight: 800;">Style can be added as inline element using the style attribute on tags as is the case for this paragraph. Here font-weight has been given a weight of 800.</p>
+        <p class = "font">The inline style takes precedent over all other style<br>
+        declarations. Next in order of precedent is the embedded<br>
+        style. This uses style tags and is often found in the <br>
+        header section of a page. This pre tag is styled with <br>
+        embedded style. An extra large green font.</p>
+        <p></p>
+        <p>Ideally style is held seperate to structure in a style sheet. Other than the 2 examples above all other style on this page is in a separate style sheet. Including the change of base font to Arial.</p>
 
-    <br>
-    <p>Margin, padding, border and floats added to achieve this layout of colums</p>
+        <h2 id = "h3_font">Selectors</h2>
+        <p>CSS selectors are used to apply style. There is the element selector, class selector and id selector. All being well you have used an element selector to modify the font on this page by adding style to the body<br>
+        tag in your attached style sheet. Words in this <span class = "space">sentence</span> have been <span class = "space">styled</span> using a class selector applied to letter-spacing and the heading for this section with an id selector.</p>
 
-</body>
+        <h2>Box Model</h2>
+        <div>
+            <div class = "box" id = "first"> 
+                <a href = "https://www.tutorialrepublic.com/html-tutorial/">https://www.tutorialrepublic.com/html-tutorial/</a>
+            </div>
+            <div class = "box" id = "second"> 
+                <a href = "https://www.tutorialrepublic.com/css-tutorial/">https://www.tutorialrepublic.com/css-tutorial/</a>
+            </div>
+            <div class = "box" id = "second"> 
+                <a href = "https://www.w3schools.com/">https://www.w3schools.com/</a>
+            </div>
+        </div>
+        <br><br><p>The links above are held in a list that is re-styled to remove list-style-type and display inline. Padding, margin and border are then added as appropriate.</p>
+
+        <h2>Layout</h2>
+        <div>
+            <div class = "box_2" id = "first_2">
+                These words are in column 1
+            </div>
+            <div class= "box_2" id = second_2>
+                These words are in column 2
+            </div>
+            <div class = "box_2" id = third_2>
+                These words are in column 3
+            </div>
+        </div>
+        <br><br><br><br><p>Margin, padding, borders and floats added to achieve this layout of columns.</p>
+
+    </body>
+
 </html>

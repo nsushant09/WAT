@@ -1,21 +1,35 @@
 <?php
 
-    if(isset($_POST['btnSearch'])){
-       performProductDisplayOperation($connection);
-    }else if(isset($_POST['btnFilter'])){
+    if(isset($_POST['btnFilter'])){
         performProductDisplayOperation($connection);
+        if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
+            performUserDisplayOperation($connection, false);
+            echo('<script>location.href="admin_dashboard.php#itemsID";</script>');
+        }
+    }else if(isset($_POST['btnUserSearch'])){
+            performProductDisplayOperation($connection);
+            performUserDisplayOperation($connection, true);
+            echo('<script>location.href="admin_dashboard.php#userTableID";</script>');
     }else{
         performProductDisplayOperation($connection);
-
         if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
-            performUserDisplayOperation($connection);
+            performUserDisplayOperation($connection, false);
         }
-
     }
 
-    function performUserDisplayOperation($connection){
-        titleWithInsertion('Users', '+ Insert an User', '../Registration/registration.php');
+
+
+    function performUserDisplayOperation($connection, $isUserSearchClicked){
+        titleWithInsertion('Users', '+ Insert an User', '../Registration/registrationupdateform.php', 'userTableID');
+
         $query = "SELECT * FROM User WHERE userRole = 'user' ";
+        if($isUserSearchClicked){
+            if(isset($_POST['btnUserSearch'])){
+                $searchText = secureString($_POST['userSearchValue'], FILTER_SANITIZE_STRING);
+                $query = "SELECT * FROM User WHERE userName LIKE '%$searchText%' AND userRole = 'user' "; 
+            }
+        }
+        
         $result = mysqli_query($connection, $query);
         if($result){
             if(mysqli_num_rows($result) > 0){
@@ -43,7 +57,7 @@
                     echo('<td>' .$row['userAgeRange'] .'</td>');
                     echo('<td>' .$row['userRole'] .'</td>');
                     echo('<td>' .$row['userStatus'] .'</td>');
-                    echo('<td><a style="color:#061c34" href="amendProduct.php?id=' .$row['userID'] .'&action=edit">Update</a></td>');
+                    echo('<td><a style="color:#061c34" href="../Registration/registrationupdateform.php?id=' .$row['userID'] .'&action=update">Update</a></td>');
                     echo('<td><a style="color:#061c34" href="delete.php?id=' .$row['userID'] .'&action=user_delete">Delete</a></td>');
                     echo('</tr>');
 
@@ -65,18 +79,19 @@
     }
 
     function performProductDisplayOperation($connection){
-        titleWithInsertion('Items', '+ Insert an Item', 'addupdateform.php?action=add');
+        titleWithInsertion('Items', '+ Insert an Item', 'addupdateform.php?action=add', 'itemsID');
 
         if(isset($_POST['searchValue'])){
-            $searchValue = secureString($_POST['searchValue']);
+            $searchValue = secureString($_POST['searchValue'], FILTER_SANITIZE_STRING);
         }else{
             $searchValue = "";
         }
         if(isset($_POST['categoryDropdown'])){
-            $category = secureString($_POST['categoryDropdown']);
+            $category = secureString($_POST['categoryDropdown'], FILTER_SANITIZE_STRING);
         }else{
             $category = 'all';
         }
+        $_SESSION['categoryDropdown'] = $category;
 
         $query = "SELECT * FROM Laptop ";
 
@@ -103,13 +118,14 @@
 
         $result = mysqli_query($connection, $query);
 
+
         if($result){
             if(mysqli_num_rows($result) > 0){
                 $count = 0;
     
                 //Setting up for row
                 echo('<div class="container">');
-                echo('<div class="row" >');
+                echo('<div class="row"  style="margin-top:-64px">');
     
                 while($row = mysqli_fetch_assoc($result)){
     
@@ -141,7 +157,6 @@
 
     function displayCard($item){
 
-        // style="border:1px solid #1d385550;border-radius:32px;padding:16px;margin-right:16px;">
         echo('<div class="col">');
         
         echo('<div style="width:22rem;padding:16px" class="card">');
@@ -203,16 +218,36 @@
         }
     }
 
-    function titleWithInsertion($title, $insertString, $insertLink){
-        echo('<div class="row">');
+    function titleWithInsertion($title, $insertString, $insertLink, $id){
+        echo('<div class="row" id='.$id .'>');
+        if($title == "Users"){
+            echo '<div class="col-5">';
+        }else{
             echo '<div class="col-9">';
+        }
                 echo '<h1 style="font-family:Trebuchet MS;">' .$title .'</h1>';
             echo '</div>';
 
             if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
+
                 echo '<div class="col-3" style="text-align:end">';
                     echo '<a class="nav-link active" aria-current="page" href="' .$insertLink .'"style="color:#061c34;margin-top:8px;font-weight:bold;">' .$insertString .'</a>';
                 echo '</div>';
+
+                if($title == "Users"){
+                    echo '<div class="col-md-4" style="text-align:end">';
+                    echo '<form action="" method="POST">';
+                    echo '<div class="d-flex form-inputs">';
+                        echo '<input class="form-control" type="text" placeholder="Search user..." name="userSearchValue" value="';
+                            if(isset($_POST['userSearchValue'])){
+                                echo $_POST['userSearchValue'];
+                            }
+                        echo'">';
+                        echo '<input type = "submit" class="btn btn-primary" name="btnUserSearch" value="Search" style="max-width:80px;background-color:#061c34"/>';
+                    echo '</div>';
+                    echo '</form>';
+                    echo '</div>';
+                }
             }
             
         echo '</div>';

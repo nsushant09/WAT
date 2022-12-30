@@ -3,7 +3,7 @@
 echo "<h1>Variable</h1>";
 $name = "David";
 $age = 12;
-echo("Hi my name is " .$name ."and I am " .$age ."years old");
+echo("Hi my name is " .$name ." and I am " .$age ."years old <br>");
 echo("Hi my name is $name and I am $age years old");
 
 echo "<h1>Functions</h1>";

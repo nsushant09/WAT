@@ -3,10 +3,10 @@
 
     if(isset($_POST['btnSubmit'])){
 
-            $username = secureString($_POST['username']);
-            $email = secureString($_POST['email']);
-            $password = secureString($_POST['password']);
-            $ageRange = secureString($_POST['ageRange']);
+            $username = secureString($_POST['username'], FILTER_SANITIZE_STRING);
+            $email = secureString($_POST['email'], FILTER_SANITIZE_EMAIL);
+            $password = secureString($_POST['password'], FILTER_SANITIZE_STRING);
+            $ageRange = secureString($_POST['ageRange'], FILTER_SANITIZE_STRING);
 
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
@@ -34,6 +34,7 @@
 
                     if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
                         //if admin is logged in and registers then go back to admin dashboard 
+                        $_SESSION['dashboardMessage'] = "User Registered Successfully";
                     }else{
                         setcookie("LOGGED_IN_USER", $username, time() + 600, "/");
                         session_destroy();
@@ -41,7 +42,7 @@
                     header("location:main.php");
 
                 }else{
-                    $_SESSION['registrationError'] = "Could not register user";
+                    $_SESSION['registrationUpdateMessage'] = "Could not register user";
                     header("Location: {$_SERVER['HTTP_REFERER']}");
                 }
             }else{

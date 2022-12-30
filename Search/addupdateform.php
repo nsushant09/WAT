@@ -1,20 +1,24 @@
 <?php
+
     include('init.php');
 
     $action = $_GET['action'];
 
     if($action == 'add'){
-        unset($_SESSION['name']);
-        unset($_SESSION['brand']);
-        unset($_SESSION['size']);
-        unset($_SESSION['category']);
-        unset($_SESSION['price']);
-        unset($_SESSION['isInStock']);
+        // unset($_SESSION['name']);
+        // unset($_SESSION['brand']);
+        // unset($_SESSION['size']);
+        // unset($_SESSION['category']);
+        // unset($_SESSION['price']);
+        // unset($_SESSION['isInStock']);
 
     }else{
         $id = $_GET['id'];
         $query = "SELECT * FROM Laptop WHERE id = '$id' LIMIT 1";
         $result = mysqli_query($connection, $query);
+        if($result){
+
+        }
         while($row = mysqli_fetch_assoc($result)){
             $_SESSION['name'] = $row['name'];
             $_SESSION['brand'] = $row['brand'];
@@ -80,11 +84,13 @@
                 <input type="text" class="form-control" name="name" value="<?php
                     if(isset($_SESSION['name'])){
                         echo $_SESSION['name'];
+                        unset($_SESSION['name']);
                     }
                     ?>">
                 <div id="nameError" class="form-text"><?php
                     if(isset($_SESSION['nameError'])){
                         echo $_SESSION['nameError'];
+                        unset($_SESSION['nameError']);
                     }
                 ?></div>
             </div>
@@ -94,11 +100,13 @@
                 <input type="text" class="form-control" name="brand" value="<?php
                     if(isset($_SESSION['brand'])){
                         echo $_SESSION['brand'];
+                        unset($_SESSION['brand']);
                     }
                 ?>">
                 <div id="brandError" class="form-text"><?php
                     if(isset($_SESSION['brandError'])){
                         echo $_SESSION['brandError'];
+                        unset($_SESSION['brandError']);
                     }
             ?></div>
             </div>
@@ -108,10 +116,12 @@
                 <input type="text" class="form-control" name="size" value="<?php
                     if(isset($_SESSION['size'])){
                         echo $_SESSION['size'];
+                        unset($_SESSION['size']);
                     }?>">
                 <div id="sizeError" class="form-text"><?php
                     if(isset($_SESSION['sizeError'])){
                         echo $_SESSION['sizeError'];
+                        unset($_SESSION['sizeError']);
                     }
                 ?></div>
             </div>
@@ -121,10 +131,12 @@
                 <input type="text" class="form-control" name="price" value="<?php
                     if(isset($_SESSION['price'])){
                         echo $_SESSION['price'];
+                        unset($_SESSION['price']);
                     }?>">
                 <div id="priceError" class="form-text"><?php
                     if(isset($_SESSION['priceError'])){
                         echo $_SESSION['priceError'];
+                        unset($_SESSION['priceError']);
                     }
                 ?></div>
             </div>
@@ -154,9 +166,13 @@
                 <div id="categoryError" class="form-text"><?php
                     if(isset($_SESSION['categoryError'])){
                         echo $_SESSION['categoryError'];
+                        unset($_SESSION['categoryError']);
                     }
             ?></div>
             </div>
+            <?php
+                unset($_SESSION['category']);
+            ?>
 
             <div class="mb-3">
                 <label for="formFile" class="form-label">Image</label>
@@ -174,8 +190,10 @@
                 function returnInStock(){
                     if(isset($_SESSION['isInStock'])){
                         if($_SESSION['isInStock'] == '1'){
+                            unset($_SESSION['isInStock']);
                             return "CHECKED";
                         }
+                        unset($_SESSION['isInStock']);
                         return "";
                     }
                     return "";

@@ -7,12 +7,12 @@
     $databaseName = 'WAT';
     $connection = mysqli_connect($hostname, $username, $password, $databaseName) or die("Unable to connect to database!");
 
-    function secureString($string){
+    function secureString($string, $sanitizationType){
         return trim(strip_tags(
                 htmlspecialchars(
                     addslashes(
                         htmlentities(
-                            $string
+                            filter_var($string, $sanitizationType)
                         )
                     )
                 )
