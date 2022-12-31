@@ -30,6 +30,7 @@
         $query = "UPDATE User SET userName = '$username' , userEmail = '$email' , userAgeRange = '$ageRange' , userStatus = '$status', userUpdatedAt = '$updateAt' WHERE userID = '$id'";
         
         if(mysqli_query($connection, $query)){
+            session_destroy();
             $_SESSION['dashboardMessage'] = "User Data Updated Successfully";
             header("location:main.php");
         }else{

@@ -64,5 +64,20 @@ a{
     margin-right:8px;
     background-color: #061c34;
 }
+#countCardDigits{
+    font-family:Trebuchet MS;
+    font-size:256px;
+    color:white
+}
+#countCardTitle{
+    font-family:Trebuchet MS;
+    font-size:96px;
+    color:whitesmoke
+}
 
+@media screen and (max-width:576px) {
+    .container{
+        padding: 16px;
+    }
+}
 /* style="border:2px solid #061c34aa;border-radius:32px;padding:16px;margin-right:8px;" */

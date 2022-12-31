@@ -69,7 +69,6 @@
 
             <div class="col-md-4" style="margin-top:8px">
                     <!-- Radio Group to sort with name or price -->
-                    <label for="radioLabel">Sort : </label>
                     <div class="form-check form-check-inline">
                             <input class="form-check-input" value="nameSortRadio" type="radio" name="sortRadio" <?php
                                 if(isset($_POST['sortRadio'])){
@@ -98,7 +97,7 @@
 
                 </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-top:8px">
                     <!-- Dropdown to select category -->
                     <select class="form-select" name="categoryDropdown" aria-label="Default select example">
                         <option selected value="all" <?php
@@ -129,24 +128,26 @@
             </div>
 
 
-            <div class="d-grid gap-2 col-2 mx-auto">
-                    <input type="submit" id="btnFilter"class="btn btn-primary" type="button" name="btnFilter" style="background-color:#061c34;margin:16px;" value="Filter">
+            <div class="row justify-content-md-center">
+            <div class="col">
+                <input type="submit" id="btnFilter"class="btn btn-primary" type="button" name="btnFilter" style="background-color:#061c34;margin:16px;" value="Filter">
+            </div>
             </div>
 
             </div>
 
         </form>
 
-        <div class="container text-center">
+        <div class="container text-center" style="margin-top:-64px">
             <div class="row justify-content-md-center">
                 <div class="col" style="margin-top:32px;margin-bottom:32px;">
                     <a href="#itemsID">
                     <div class = "card" style="background-color:#061c34;">
                         <div class="card-body">
-                            <h1 style="font-family:Trebuchet MS;font-size:256px;color:white"><?php
+                            <h1 id="countCardDigits" style="font-family:Trebuchet MS;font-size:96px;color:white"><?php
                                 echo $itemCount;
                             ?></h1>
-                            <h1 style="font-family:Trebuchet MS;font-size:96px;color:whitesmoke">Items</h1>
+                            <h1 id="countCardTitle" style="font-family:Trebuchet MS;font-size:64px;color:whitesmoke">Items</h1>
                         </div>
                     </div>
                     </a>
@@ -156,10 +157,10 @@
                     <a href="#userTableID">
                     <div class="card" style="background-color:#061c34;">
                         <div class="card-body">
-                            <h1 style="font-family:Courier;font-size:256px;color:white"><?php
+                            <h1 id="countCardDigits" style="font-family:Courier;font-size:96px;color:white"><?php
                                 echo $userCount;
                             ?></h1>
-                            <h1 style="font-family:Trebuchet MS;font-size:96px;color:whitesmoke">Users</h1>
+                            <h1 id="countCardTitle" style="font-family:Trebuchet MS;font-size:64px;color:whitesmoke">Users</h1>
                         </div>
                     </div>
                     </a>

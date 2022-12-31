@@ -51,9 +51,8 @@
 
             <div class="row justify-content-md-center" style="margin-top:16px;">
 
-            <div class="col-md-4" style="margin-top:8px">
+            <div class="col-md-4">
                     <!-- Radio Group to sort with name or price -->
-                    <label for="radioLabel">Sort : </label>
                     <div class="form-check form-check-inline">
                             <input class="form-check-input" value="nameSortRadio" type="radio" name="sortRadio" <?php
                                 if(isset($_POST['sortRadio'])){
@@ -113,8 +112,10 @@
             </div>
 
 
-            <div class="d-grid gap-2 col-2 mx-auto">
+            <div class="row justify-content-md-center">
+            <div class="col">
                 <input type="submit" id="btnFilter"class="btn btn-primary" type="button" name="btnFilter" style="background-color:#061c34;margin:16px;" value="Filter">
+            </div>
             </div>
 
             </div>

@@ -216,19 +216,20 @@
         if($title == "Users"){
             echo '<div class="col-5">';
         }else{
-            echo '<div class="col-9">';
+            echo '<div class="col-5">';
         }
             echo '<h1 style="font-family:Trebuchet MS;">' .$title .'</h1>';
             echo '</div>';
 
             if(isset($_COOKIE['LOGGED_IN_ADMIN'])){
 
-                echo '<div class="col-3" style="text-align:end">';
+                echo '<div class="col-7" style="text-align:end">';
                     echo '<a class="nav-link active" aria-current="page" href="' .$insertLink .'"style="color:#061c34;margin-top:8px;font-weight:bold;">' .$insertString .'</a>';
                 echo '</div>';
 
                 if($title == "Users"){
-                    echo '<div class="col-md-4" style="text-align:end">';
+                    echo '<div class="row justify-content-md-center" style="margin-bottom:16px">';
+                    echo '<div class="col-md-8" style="text-align:end">';
                     echo '<form action="" method="POST">';
                     echo '<div class="d-flex form-inputs">';
                         echo '<input class="form-control" type="text" placeholder="Search user..." name="userSearchValue" value="';
@@ -239,6 +240,7 @@
                         echo '<input type = "submit" class="btn btn-primary" name="btnUserSearch" value="Search" style="max-width:80px;background-color:#061c34"/>';
                     echo '</div>';
                     echo '</form>';
+                    echo '</div>';
                     echo '</div>';
                 }
             }
