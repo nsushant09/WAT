@@ -139,7 +139,7 @@
 
         <div class="container text-center">
             <div class="row justify-content-md-center">
-                <div class="col">
+                <div class="col" style="margin-top:32px;margin-bottom:32px;">
                     <a href="#itemsID">
                     <div class = "card" style="background-color:#061c34;">
                         <div class="card-body">
@@ -152,7 +152,7 @@
                     </a>
                 </div>
 
-                <div class="col">
+                <div class="col" style="margin-top:32px;margin-bottom:32px">
                     <a href="#userTableID">
                     <div class="card" style="background-color:#061c34;">
                         <div class="card-body">

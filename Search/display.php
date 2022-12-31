@@ -25,7 +25,7 @@
         $query = "SELECT * FROM User WHERE userRole = 'user' ";
         if($isUserSearchClicked){
             if(isset($_POST['btnUserSearch'])){
-                $searchText = secureString($_POST['userSearchValue'], FILTER_SANITIZE_STRING);
+                $searchText = secureString($_POST['userSearchValue']);
                 $query = "SELECT * FROM User WHERE userName LIKE '%$searchText%' AND userRole = 'user' "; 
             }
         }
@@ -34,6 +34,7 @@
         if($result){
             if(mysqli_num_rows($result) > 0){
 
+                echo('<div class="table-responsive">');
                 echo('<table class="table"');
                 echo('<thead>');
                 echo('<tr>');
@@ -75,6 +76,7 @@
             echo('<div class="container text-center">');
             echo('<h4 class="display-4">Error Requesting Process</h4>');
             echo('</div>');
+            echo('</div>');
         }
     }
 
@@ -82,12 +84,12 @@
         titleWithInsertion('Items', '+ Insert an Item', 'addupdateform.php?action=add', 'itemsID');
 
         if(isset($_POST['searchValue'])){
-            $searchValue = secureString($_POST['searchValue'], FILTER_SANITIZE_STRING);
+            $searchValue = secureString($_POST['searchValue']);
         }else{
             $searchValue = "";
         }
         if(isset($_POST['categoryDropdown'])){
-            $category = secureString($_POST['categoryDropdown'], FILTER_SANITIZE_STRING);
+            $category = secureString($_POST['categoryDropdown']);
         }else{
             $category = 'all';
         }
@@ -125,19 +127,10 @@
     
                 //Setting up for row
                 echo('<div class="container">');
-                echo('<div class="row"  style="margin-top:-64px">');
+                echo('<div class="row justify-md-content-center">');
     
                 while($row = mysqli_fetch_assoc($result)){
-    
-                    if($count % 3 == 0 ){
-                        //TODO:Create new row and display
-                        echo('</div>');
-                        echo('<div class="row" style="margin-bottom:32px;margin-top:32px">');
-                    }
-                    //TODO: Show card and all
                     displayCard($row);
-                    $count++;
-    
                 }
     
                 echo('</div>');
@@ -157,7 +150,7 @@
 
     function displayCard($item){
 
-        echo('<div class="col">');
+        echo('<div class="col d-flex justify-content-center" style="margin-bottom:32px;">');
         
         echo('<div style="width:22rem;padding:16px" class="card">');
 
@@ -225,7 +218,7 @@
         }else{
             echo '<div class="col-9">';
         }
-                echo '<h1 style="font-family:Trebuchet MS;">' .$title .'</h1>';
+            echo '<h1 style="font-family:Trebuchet MS;">' .$title .'</h1>';
             echo '</div>';
 
             if(isset($_COOKIE['LOGGED_IN_ADMIN'])){

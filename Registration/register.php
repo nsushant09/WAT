@@ -3,10 +3,10 @@
 
     if(isset($_POST['btnSubmit'])){
 
-            $username = secureString($_POST['username'], FILTER_SANITIZE_STRING);
-            $email = secureString($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $password = secureString($_POST['password'], FILTER_SANITIZE_STRING);
-            $ageRange = secureString($_POST['ageRange'], FILTER_SANITIZE_STRING);
+            $username = secureString($_POST['username']);
+            $email = secureString($_POST['email']);
+            $password = secureString($_POST['password']);
+            $ageRange = secureString($_POST['ageRange']);
 
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;

@@ -1,10 +1,10 @@
 <?php
     include("init.php");
-    $id = secureString($_POST['id'], FILTER_SANITIZE_INT);
-    $username = secureString($_POST['username'], FILTER_SANITIZE_STRING);
-    $email = secureString($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $ageRange = secureString($_POST['ageRange'], FILTER_SANITIZE_STRING);
-    $status = secureString($_POST['status'], FILTER_SANITIZE_STRING);
+    $id = $_POST['id'];
+    $username = secureString($_POST['username']);
+    $email = secureString($_POST['email']);
+    $ageRange = secureString($_POST['ageRange']);
+    $status = secureString($_POST['status']);
     if($status == 'on'){
         $status = 'active';
     }else{

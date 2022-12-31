@@ -5,11 +5,11 @@
 
         eraseSessionErrors();
 
-        $name = secureString($_POST['name'], FILTER_SANITIZE_STRING);
-        $price = secureString($_POST['price'], FILTER_SANITIZE_FLOAT);
-        $category = secureString($_POST['category'], FILTER_SANITIZE_STRING);
-        $brand = secureString($_POST['brand'], FILTER_SANITIZE_STRING);
-        $size = secureString($_POST['size'], FILTER_SANITIZE_FLOAT);
+        $name = secureString($_POST['name']);
+        $price = secureString($_POST['price']);
+        $category = secureString($_POST['category']);
+        $brand = secureString($_POST['brand']);
+        $size = secureString($_POST['size']);
 
         $image = $_FILES['image']['name'];
         $imageSize = $_FILES['image']['size'];
@@ -59,11 +59,9 @@
     function validateName($name){
         if(empty($name)){
             $_SESSION['nameError'] = "Please fill device name";
-            $_SESSION['addUpdateFormMessage'] = "Could not validate device name fill";
             return false;
         }else if(strlen($name) > 50){
             $_SESSION['nameError'] = "Make sure you device name is less than 50 characters";
-            $_SESSION['addUpdateFormMessage'] = "Could not validate less than 50";
             return false;
         }else{
             return true;

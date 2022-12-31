@@ -18,7 +18,7 @@
         }
 
         if($action == "user_delete"){
-            $query = "DELETE FROM User WHERE id = $deleteId"; 
+            $query = "DELETE FROM User WHERE userID = $deleteId"; 
             if(mysqli_query($connection, $query)){
                 $_SESSION['dashboardMessage'] = "Successfully Deleted User ";
             }

@@ -53,9 +53,17 @@ body{
 #usernameError, #passwordError, #emailError, #ageRangeError, #chkTandCError{
     color: rgba(229, 58, 58, 0.885);
 } 
-
+#nameError, #brandError, #sizeError, #priceError, #categoryError{
+    color: rgba(229, 58, 58, 0.885);
+}
 a{
     text-decoration: none;
     color: #061c34;
     font-weight: bold;
+}
+
+@media screen and (max-width:576px) {
+    .container{
+        min-width:0px;
+    }
 }
